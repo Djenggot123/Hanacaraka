@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Javanese:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 
 <style>
@@ -157,8 +156,8 @@
   text-align:center;
   display:block;
   max-width:100%;
-  font-family: "Patrick Hand", cursive !important; /* <--- TAMBAHKAN BARIS INI */
-  font-size: 22px; /* <--- Tambahkan ini juga jika teks terlihat terlalu kecil */
+  font-family: "Patrick Hand", cursive !important;
+  font-size: 22px;
   letter-spacing: 1px;
 }
 
@@ -188,6 +187,27 @@
   .set-note{font-size:10px;color:#B26A00;background:#FFF3D6;border:1px solid #F2D68A;border-radius:4px;padding:5px 7px;margin-top:5px;line-height:1.4;display:none}
   .set-note.show{display:block}
 
+  /* Tombol Simpan PNG di dalam Popup */
+  .btn-save-popup {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(135deg, var(--g1), var(--g2));
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 3px 8px rgba(189,0,104,.35);
+    transition: transform 0.15s;
+  }
+  .btn-save-popup:active { transform: scale(0.97); }
+
   #pngArea{position:fixed;left:-99999px;top:0;background:transparent;padding:0;display:block}
   #pngSticker{width:1100px;background:#ffffff;border-radius:44px;padding:64px 56px;display:flex;flex-direction:column;align-items:center;gap:36px}
   #pngAksara{color:var(--gold);line-height:1.7;word-break:break-word;text-align:center;width:100%}
@@ -198,7 +218,7 @@
   line-height:1.4;
   text-align:center;
   word-break:break-word;
-  font-family: "Patrick Hand", cursive !important; /* <--- TAMBAHKAN BARIS INI */
+  font-family: "Patrick Hand", cursive !important;
 }
   .png-pita span{color:#fff;font-weight:700;letter-spacing:1px;line-height:1.4;text-align:center;word-break:break-word}
 
@@ -341,6 +361,11 @@
     <label class="set-label">Font Pilihan</label>
     <select id="setFont"></select>
     <div class="set-note" id="setFontNote"></div>
+
+    <!-- TOMBOL SIMPAN PNG BARU DI DALAM POPUP -->
+    <button id="btnPNGPopup" class="btn-save-popup" onclick="savePNG()">
+      <i class="fa-solid fa-image"></i> Simpan sebagai PNG
+    </button>
   </div>
 </div>
 
@@ -496,7 +521,7 @@ function toggleAdeg(){
 }
 
 /* ================================================================
-   KONVERSI LATIN → HANACARAKA (LOGIKA LAMA YANG STABIL)
+   KONVERSI LATIN → HANACARAKA
    ================================================================ */
 const map={'ha':'ꦲ','na':'ꦤ','ca':'ꦕ','ra':'ꦫ','ka':'ꦏ','da':'ꦢ','ta':'ꦠ','sa':'ꦱ','wa':'ꦮ','la':'ꦭ','pa':'ꦥ','dha':'ꦝ','ja':'ꦗ','ya':'ꦪ','nya':'ꦚ','ma':'ꦩ','ga':'ꦒ','ba':'ꦧ','tha':'ꦛ','nga':'ꦔ','a':'ꦲ','i':'ꦲꦶ','u':'ꦲꦸ','e':'ꦲꦼ','é':'ꦲꦺ','ê':'ꦲꦼ','o':'ꦲꦴ','h':'ꦲ','n':'ꦤ','c':'ꦕ','r':'ꦫ','k':'ꦏ','d':'ꦢ','t':'ꦠ','s':'ꦱ','w':'ꦮ','l':'ꦭ','p':'ꦥ','j':'ꦗ','y':'ꦪ','m':'ꦩ','g':'ꦒ','b':'ꦧ'};
 const vokalMap={'i':'ꦶ','u':'ꦸ','e':'ꦼ','é':'ꦺ','ê':'ꦼ','o':'ꦴ','a':''};
@@ -593,7 +618,14 @@ function salinFallback(teks){
 
 function savePNG(){
   const btn=document.getElementById('btnPNG');
+  const btnPopup=document.getElementById('btnPNGPopup');
+  
+  const originalText = btn.innerHTML;
+  const originalTextPopup = btnPopup.innerHTML;
+
   btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+  btnPopup.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+  
   const pa=document.getElementById('pngAksara');
   buildPreviewAksara('pngAksara');
   pa.style.fontFamily=currentFont.family;
@@ -614,7 +646,10 @@ function savePNG(){
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       toast('✓ PNG stiker (alas putih, latar transparan) tersimpan');
     }).catch(err=>{ console.error(err); toast('✗ Gagal menyimpan PNG — coba browser Chrome'); })
-    .finally(()=>{ btn.innerHTML='<i class="fa-solid fa-image"></i> Simpan PNG'; });
+    .finally(()=>{ 
+      btn.innerHTML = originalText; 
+      btnPopup.innerHTML = originalTextPopup;
+    });
   };
   if(document.fonts&&document.fonts.load&&!fontJawaSiap){
     document.fonts.load("120px 'Noto Sans Javanese'","ꦲꦤꦕꦫꦏ").then(render).catch(render);
@@ -770,4 +805,4 @@ konversi();
 rapikanTombolE();
 </script>
 </body>
-</html>
+  </html>
