@@ -127,6 +127,7 @@
   .cara{background:#fff;border:1px solid var(--line);border-radius:5px;padding:12px;line-height:1.6;font-size:13px;color:#222}
   .cara .contoh{font-size:24px;line-height:1.6;color:var(--gold)}
 
+  /* ============ PREVIEW ============ */
   #fullscreenView{display:none;position:fixed;inset:0;z-index:999;background:#413c59;align-items:center;justify-content:center;padding:18px;text-align:center}
   #fullscreenView.show{display:flex}
   .fs-card{position:relative;background:#ffffff;border:7px double var(--gold);border-radius:15px;box-shadow:0 1px 1px rgba(0,0,0,0.636);padding:26px 20px 0;width:min(94vw,640px);height:min(92vh,640px);display:flex;flex-direction:column;align-items:center;overflow:hidden}
@@ -139,27 +140,27 @@
   #fsAksaraIn{flex:0 0 auto;color:var(--gold);line-height:1.7;word-break:normal;text-shadow:0 1px 0 #fff4d3, 0 1px 3px rgba(41,30,0,0.27);width:100%}
   #fsAksara .syl, #pngAksara .syl{display:inline-block}
 
-.patrick-hand-regular {
-  font-family: "Patrick Hand", cursive !important;
-  font-weight: 400;
-  font-style: normal;
-}
+  .patrick-hand-regular {
+    font-family: "Patrick Hand", cursive !important;
+    font-weight: 400;
+    font-style: normal;
+  }
 
   .pita{position:relative;width:calc(100% + 40px);margin:0 -20px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--g1) 0%,var(--g2) 50%,var(--g1) 100%);color:#fff;border:none;cursor:pointer;padding:15px 18px;border-radius:0 0 5px 5px;flex:0 0 auto;-webkit-tap-highlight-color:transparent;transition:filter .15s}
   .pita:active{filter:brightness(.85)}
   .pita span{
-  color:#fff;
-  font-weight:700;
-  letter-spacing:.4px;
-  line-height:1.4;
-  word-break:break-word;
-  text-align:center;
-  display:block;
-  max-width:100%;
-  font-family: "Patrick Hand", cursive !important;
-  font-size: 22px;
-  letter-spacing: 1px;
-}
+    color:#fff;
+    font-weight:700;
+    letter-spacing:.4px;
+    line-height:1.4;
+    word-break:break-word;
+    text-align:center;
+    display:block;
+    max-width:100%;
+    font-family: "Patrick Hand", cursive !important;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
 
   #fsSetBtn{position:absolute;top:3px;right:3px;z-index:5;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #FFE9A8 0%, var(--gold-bright) 45%, var(--gold) 100%);border:5px solid #fff;cursor:pointer;box-shadow:0 0px 0px rgba(0,0,0,.35);-webkit-tap-highlight-color:transparent;padding:0}
   #fsSetBtn:active{transform:scale(.9)}
@@ -208,19 +209,28 @@
   }
   .btn-save-popup:active { transform: scale(0.97); }
 
-  #pngArea{position:fixed;left:-99999px;top:0;background:transparent;padding:0;display:block}
-  #pngSticker{width:1100px;background:#ffffff;border-radius:44px;padding:64px 56px;display:flex;flex-direction:column;align-items:center;gap:36px}
-  #pngAksara{color:var(--gold);line-height:1.7;word-break:break-word;text-align:center;width:100%}
- .png-pita span{
-  color:#fff;
-  font-weight:700;
-  letter-spacing:1px;
-  line-height:1.4;
-  text-align:center;
-  word-break:break-word;
-  font-family: "Patrick Hand", cursive !important;
-}
-  .png-pita span{color:#fff;font-weight:700;letter-spacing:1px;line-height:1.4;text-align:center;word-break:break-word}
+  /* ===== AREA RENDER PNG (Sama persis dengan Preview) ===== */
+  #pngArea{position:fixed;left:-99999px;top:0;background:transparent;padding:18px;display:block}
+  #pngSticker{
+    position:relative;
+    background:#ffffff;
+    border:7px double var(--gold);
+    border-radius:15px;
+    box-shadow:0 1px 1px rgba(0,0,0,0.636);
+    padding:26px 20px 0;
+    width: 640px;
+    height: 640px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    overflow:hidden;
+  }
+  #pngSticker::before{content:"";position:absolute;inset:9px;border:1px solid #E9C96A;border-radius:5px;pointer-events:none}
+  
+  #pngAksara{width:100%;flex:1 1 auto;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:9px 11px 16px; justify-content:center; color:var(--gold);line-height:1.7;word-break:normal;text-shadow:0 1px 0 #fff4d3, 0 1px 3px rgba(41,30,0,0.27);}
+  
+  .png-pita{position:relative;width:calc(100% + 40px);margin:0 -20px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--g1) 0%,var(--g2) 50%,var(--g1) 100%);color:#fff;padding:15px 18px;border-radius:0 0 5px 5px;flex:0 0 auto;}
+  .png-pita span{color:#fff;font-weight:700;letter-spacing:1px;line-height:1.4;text-align:center;word-break:break-word;font-family: "Patrick Hand", cursive !important;}
 
   #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:var(--pink);color:#fff;padding:11px 22px;border-radius:30px;font-size:13px;font-weight:700;z-index:2000;box-shadow:0 6px 18px rgba(0,0,0,.3);opacity:0;transition:transform .25s,opacity .25s;pointer-events:none;max-width:88vw;text-align:center}
   #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
@@ -276,7 +286,6 @@
     <div class="hasil" id="hasil">ꦲꦭꦺꦴꦲꦥꦏꦧꦂ</div>
     <div class="latin-hasil" id="latinHasil">ha - lo - a - pa - ka - bar</div>
 
-    <!-- Tombol Adeg-adeg disini -->
     <div class="adeg-row" id="adegRow" onclick="toggleAdeg()">
       <input type="checkbox" id="adegCheck">
       <label for="adegCheck"><span class="adeg-glyph">꧋</span> Pada Adeg-adeg (mode kutipan)</label>
@@ -362,7 +371,6 @@
     <select id="setFont"></select>
     <div class="set-note" id="setFontNote"></div>
 
-    <!-- TOMBOL SIMPAN PNG BARU DI DALAM POPUP -->
     <button id="btnPNGPopup" class="btn-save-popup" onclick="savePNG()">
       <i class="fa-solid fa-image"></i> Simpan sebagai PNG
     </button>
@@ -408,7 +416,6 @@ let currentFont=FONTS[0];
 const SET={ auto:true, size:40, lineHeight:1.7, align:'center', vAlign:'center', wrap:true };
 let lastAutoSize=40, lastLatinSize=16;
 
-/* ===== STATE ADEG-ADEG ===== */
 let adegAktif=false;
 
 function buildFontMenu(){
@@ -440,7 +447,6 @@ function setFont(key,silent){
 }
 function pilihFont(key){ setFont(key,false); document.getElementById('dropdownMenu').classList.remove('show'); }
 
-/* LOGIKA RENDERING FONT LAMA YANG STABIL */
 function terapkanFont(){
   const fam=currentFont.family;
   document.getElementById('hasil').style.fontFamily=fam;
@@ -509,7 +515,6 @@ function sisipE(){
   toast('Karakter é (Taling ꦺ) disisipkan');
 }
 
-/* ==================== TOGGLE ADEG-ADEG ==================== */
 function toggleAdeg(){
   const cb=document.getElementById('adegCheck');
   const row=document.getElementById('adegRow');
@@ -805,4 +810,4 @@ konversi();
 rapikanTombolE();
 </script>
 </body>
-  </html>
+</html>
