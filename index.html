@@ -241,6 +241,30 @@
   z-index: 1;
 }
 
+/* ===== AREA RENDER PNG (STIKER) ===== */
+#pngArea{
+  position:fixed;
+  left:-99999px;
+  top:0;
+  background:transparent;
+  padding:0;
+  display:block;
+}
+
+#pngSticker{
+  position:relative;
+  background:#ffffff; /* Latar putih utama */
+  border: 7px double var(--gold); /* Border emas */
+  border-radius: 15px;
+  width: 640px;
+  height: 640px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  /* overflow:hidden; <-- HAPUS INI agar teks yang menjuntai tidak terpotong */
+  box-shadow:0 1px 1px rgba(0,0,0,0.636);
+}
+
 /* Garis tipis emas (inner border) */
 .png-inner-border {
   position: absolute;
@@ -248,23 +272,23 @@
   border: 1px solid #E9C96A;
   border-radius: 5px;
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
 }
 
 #pngAksara{
   width:100%;
   flex:1 1 auto;
   min-height:0;
-  overflow:hidden;
   display:flex;
   flex-direction:column;
-  padding:9px 11px 16px;
+  padding: 30px 20px 20px 20px; /* Padding disesuaikan agar teks tidak menabrak border */
   justify-content:center;
   color:var(--gold);
   line-height:1.7;
   word-break:normal;
   text-shadow:0 1px 0 #fff4d3, 0 1px 3px rgba(41,30,0,0.27);
-  z-index: 3;
+  position: relative;
+  z-index: 2;
 }
 
 /* Pita Magenta di bawah */
@@ -278,7 +302,8 @@
   color:#fff;
   padding:15px 18px;
   flex:0 0 auto;
-  z-index: 3;
+  z-index: 2;
+  border-radius: 0 0 5px 5px; /* Agar pita mengikuti lengkungan bawah */
 }
 
 .png-pita span{
