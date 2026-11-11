@@ -209,28 +209,87 @@
   }
   .btn-save-popup:active { transform: scale(0.97); }
 
-  /* ===== AREA RENDER PNG (Sama persis dengan Preview) ===== */
-  #pngArea{position:fixed;left:-99999px;top:0;background:transparent;padding:18px;display:block}
-  #pngSticker{
-    position:relative;
-    background:#ffffff;
-    border:7px double var(--gold);
-    border-radius:15px;
-    box-shadow:0 1px 1px rgba(0,0,0,0.636);
-    padding:26px 20px 0;
-    width: 640px;
-    height: 640px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    overflow:hidden;
-  }
-  #pngSticker::before{content:"";position:absolute;inset:9px;border:1px solid #E9C96A;border-radius:5px;pointer-events:none}
-  
-  #pngAksara{width:100%;flex:1 1 auto;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:9px 11px 16px; justify-content:center; color:var(--gold);line-height:1.7;word-break:normal;text-shadow:0 1px 0 #fff4d3, 0 1px 3px rgba(41,30,0,0.27);}
-  
-  .png-pita{position:relative;width:calc(100% + 40px);margin:0 -20px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--g1) 0%,var(--g2) 50%,var(--g1) 100%);color:#fff;padding:15px 18px;border-radius:0 0 5px 5px;flex:0 0 auto;}
-  .png-pita span{color:#fff;font-weight:700;letter-spacing:1px;line-height:1.4;text-align:center;word-break:break-word;font-family: "Patrick Hand", cursive !important;}
+/* ===== AREA RENDER PNG (STIKER) ===== */
+#pngArea{
+  position:fixed;
+  left:-99999px;
+  top:0;
+  background:transparent;
+  padding:0;
+  display:block;
+}
+
+#pngSticker{
+  position:relative;
+  background:transparent; /* Transparan di luar */
+  border: 7px double var(--gold);
+  border-radius: 15px;
+  width: 640px;
+  height: 640px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  overflow:hidden;
+  box-shadow:0 1px 1px rgba(0,0,0,0.636);
+}
+
+/* Latar putih yang hanya ada di dalam border emas */
+.png-bg-putih {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  z-index: 1;
+}
+
+/* Garis tipis emas (inner border) */
+.png-inner-border {
+  position: absolute;
+  inset: 9px;
+  border: 1px solid #E9C96A;
+  border-radius: 5px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#pngAksara{
+  width:100%;
+  flex:1 1 auto;
+  min-height:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  padding:9px 11px 16px;
+  justify-content:center;
+  color:var(--gold);
+  line-height:1.7;
+  word-break:normal;
+  text-shadow:0 1px 0 #fff4d3, 0 1px 3px rgba(41,30,0,0.27);
+  z-index: 3;
+}
+
+/* Pita Magenta di bawah */
+.png-pita{
+  position:relative;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(90deg,var(--g1) 0%,var(--g2) 50%,var(--g1) 100%);
+  color:#fff;
+  padding:15px 18px;
+  flex:0 0 auto;
+  z-index: 3;
+}
+
+.png-pita span{
+  color:#fff;
+  font-weight:700;
+  letter-spacing:1px;
+  line-height:1.4;
+  text-align:center;
+  word-break:break-word;
+  font-family: "Patrick Hand", cursive !important;
+}
 
   #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:var(--pink);color:#fff;padding:11px 22px;border-radius:30px;font-size:13px;font-weight:700;z-index:2000;box-shadow:0 6px 18px rgba(0,0,0,.3);opacity:0;transition:transform .25s,opacity .25s;pointer-events:none;max-width:88vw;text-align:center}
   #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
@@ -379,6 +438,12 @@
 
 <div id="pngArea">
   <div id="pngSticker">
+    <!-- Latar putih di dalam border -->
+    <div class="png-bg-putih"></div>
+    <!-- Garis tipis emas di dalam -->
+    <div class="png-inner-border"></div>
+    
+    <!-- Konten -->
     <div id="pngAksara"></div>
     <div class="png-pita"><span id="pngLatin"></span></div>
   </div>
@@ -810,4 +875,4 @@ konversi();
 rapikanTombolE();
 </script>
 </body>
-</html>
+  </html>
