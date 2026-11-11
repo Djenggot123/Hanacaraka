@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HANACARAKA - Javanese Script</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Javanese:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+<style>
+  @font-face{font-family:'AB Bakul';src:url('https://cdn.jsdelivr.net/gh/Djenggot123/Djenggot123@8ffe11b307474f122d29b364c68e72b084362c1d/PERWIRA_font/AB%20bakul.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'AR Demak Beta';src:url('https://cdn.jsdelivr.net/gh/Djenggot123/Djenggot123@8ffe11b307474f122d29b364c68e72b084362c1d/PERWIRA_font/ARDemakbeta-Regular.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'Genk Kobra Java';src:url('https://cdn.jsdelivr.net/gh/Djenggot123/Djenggot123@8ffe11b307474f122d29b364c68e72b084362c1d/PERWIRA_font/Genk-Kobra%20Java%20rev.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'Adipati Genk';src:url('https://cdn.jsdelivr.net/gh/Djenggot123/Djenggot123@8ffe11b307474f122d29b364c68e72b084362c1d/PERWIRA_font/Adipati%20Genk.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'Nawatura Beta';src:url('https://cdn.jsdelivr.net/gh/Djenggot123/Djenggot123@8ffe11b307474f122d29b364c68e72b084362c1d/PERWIRA_font/Nawatura%20beta%20android2.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'New Kramawirya';src:url('https://cdn.jsdelivr.net/gh/Djenggot123/Djenggot123@8ffe11b307474f122d29b364c68e72b084362c1d/PERWIRA_font/New%20Kramawirya1.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'Damarwulan';src:url('https://cdn.jsdelivr.net/gh/Djenggot123/Djenggot123@8ffe11b307474f122d29b364c68e72b084362c1d/PERWIRA_font/damarwulan-bw.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'Gerbangpraja';src:url('https://cdn.jsdelivr.net/gh/Djenggot123/Djenggot123@8ffe11b307474f122d29b364c68e72b084362c1d/PERWIRA_font/gerbangpraja.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'Jamawi';src:url('https://cdn.jsdelivr.net/gh/Djenggot123/Djenggot123@8ffe11b307474f122d29b364c68e72b084362c1d/PERWIRA_font/jamawi-v1r0.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'nyk Ngayogyan';src:url('https://cdn.jsdelivr.net/gh/Djenggot123/Djenggot123@8ffe11b307474f122d29b364c68e72b084362c1d/PERWIRA_font/nyk%20Ngayogyan%20New%20Italic.ttf') format('truetype');font-display:swap}
+</style>
+
+<style>
+  :root{ --bg:#FDF2F7; --line:#F5C6DD; --ink:#111; --muted:#5A5A5A; --p1:#FFF0F6; --p2:#FFE3EF; --pink:#61003A; --g1:#BD0068; --g2:#FF0090; --gold:#C99600; --gold-bright:#FFC107; }
+  *{box-sizing:border-box}
+  html,body{height:100%;overflow:hidden}
+  body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);margin:0;display:flex;flex-direction:column}
+  
+  .font-jawa{font-family:'Noto Sans Javanese',serif !important}
+
+  header{background:var(--pink);color:#fff;text-align:center;padding:8px 10px 7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:10px}
+  header .jawa{
+    font-size:40px; line-height:1.4; color:var(--gold-bright);
+    font-family:'AB Bakul',serif !important;
+    text-shadow: 0 2px 0px rgba(0,0,0,.5), 0 1px 0px rgba(0,0,0,.25);
+    -webkit-text-stroke: 7px #61003A;
+    paint-order: stroke fill;
+  }
+  header .head-text{text-align:left}
+  header h1{margin:0;font-size:18px;letter-spacing:1px;color:#fff;line-height:1}
+  header p{margin:1px 0 0;color:#ffffff;font-size:9px}
+
+  .running{background:#000;overflow:hidden;flex-shrink:0;position:relative;border-bottom:1px solid #241a00}
+  .running-track{display:inline-flex;white-space:nowrap;animation:lari 46s linear infinite;will-change:transform}
+  .running:hover .running-track{animation-play-state:paused}
+  .running-track span{display:inline-block;padding:6px 0 7px;font-size:12px;font-weight:800;letter-spacing:.7px;color:var(--gold-bright);text-shadow:0 1px 2px rgba(0,0,0,.6)}
+  @keyframes lari{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  .icon-wrap{width:32px;height:32px;min-width:32px;max-width:32px;border-radius:5px;background:linear-gradient(135deg,var(--g1),var(--g2));display:grid !important;place-items:center !important;line-height:1;overflow:hidden;flex-shrink:0}
+  .icon-wrap i{color:#fff !important;font-size:14px;line-height:1 !important;margin:0 !important;display:block !important;text-shadow:-1px 1px 0 rgba(0,0,0,.45)}
+  .icon-wrap.small{width:26px;height:26px;min-width:26px;max-width:26px}
+  .icon-wrap.small i{font-size:11px}
+  .topbar{display:flex;gap:6px;padding:8px 10px;max-width:720px;width:100%;margin:0 auto;flex-shrink:0;align-items:center}
+  .dropdown{position:relative;flex:1}
+  .dropdown-btn{width:100%;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:5px;padding:8px 10px;font-size:13px;font-weight:700;cursor:pointer;color:#111;text-align:left}
+  .dropdown-btn i:last-child{margin-left:auto;color:var(--pink)}
+  .dropdown-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:5px;z-index:50;box-shadow:0 8px 20px rgba(0,0,0,.12);overflow:hidden;max-height:62vh;overflow-y:auto}
+  .dropdown-menu.show{display:block}
+  .dropdown-menu button{width:100%;display:flex;align-items:center;gap:8px;padding:10px 12px;border:none;border-bottom:1px solid #F5F5F5;background:#fff;text-align:left;font-size:13px;cursor:pointer;color:#111}
+  .dropdown-menu button:last-child{border-bottom:none}
+  .dropdown-menu button i{color:var(--pink);width:16px;text-align:center;flex-shrink:0}
+  .font-item{flex-direction:column !important;align-items:stretch !important;gap:3px !important;padding:9px 12px !important}
+  .font-item .fi-top{display:flex;align-items:center;gap:8px}
+  .font-item .fi-name{font-weight:700;font-size:13px;color:#111}
+  .font-item .fi-prev{font-size:20px;line-height:1.5;color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .font-item .fi-warn{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:#B26A00;background:#FFF3D6;border:1px solid #F2D68A;border-radius:4px;padding:2px 6px;margin-top:1px}
+  .font-item.active{background:var(--p1)}
+  .font-item.active .fi-name{color:var(--pink)}
+  .sumber-wrap{padding:6px 10px 0;max-width:720px;width:100%;margin:0 auto;flex-shrink:0}
+  .btn-sumber{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:5px;padding:5px 10px;font-size:11px;font-weight:700;color:var(--pink);cursor:pointer;text-decoration:none}
+  .btn-sumber i{font-size:10px}
+  .btn-belajar{flex:0 0 auto;display:flex;align-items:center;gap:6px;background:var(--pink);color:#fff;border:none;border-radius:5px;padding:8px 12px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+  .wrap{max-width:720px;width:100%;margin:0 auto;padding:0 10px 8px;flex:1;display:flex;flex-direction:column;min-height:0;gap:6px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:5px;padding:10px;flex-shrink:0}
+  .card.p1{background:var(--p1)}
+  .card.p2{background:var(--p2);flex:1;display:flex;flex-direction:column;min-height:0}
+  .title-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .title-row b{font-size:12px;color:#000}
+  .title-row span{font-size:11px;color:var(--muted);display:block}
+  textarea{width:100%;height:64px;min-height:64px;max-height:64px;border:1px solid #E8A8C6;border-radius:5px;padding:8px 10px;font-size:16px;outline:none;background:#fff;color:#111;resize:none}
+  .hasil{font-size:36px;line-height:1.6;flex:1;min-height:0;background:#fff;border:1px solid #E8A8C6;border-radius:5px;padding:10px 12px;color:var(--gold);word-break:break-word;overflow:hidden;display:flex;align-items:center}
+  .latin-hasil{color:#2B2B2B;font-size:12px;margin-top:6px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .btn-row{display:flex;gap:6px;margin-top:8px}
+  .btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;background:var(--pink);color:#fff;border:none;padding:10px 4px;border-radius:5px;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap}
+  .btn-light{background:#fff;color:var(--pink);border:1px solid var(--pink)}
+  .btn-grad{background:linear-gradient(135deg,var(--g1),var(--g2));border:none}
+  .catatan{font-size:10px;color:var(--muted);margin-top:6px;text-align:center;line-height:1.4}
+
+  .adeg-row{display:flex;align-items:center;gap:8px;margin-top:6px;padding:6px 10px;background:#fff;border:1px solid var(--line);border-radius:5px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+  .adeg-row input[type=checkbox]{accent-color:var(--g1);width:18px;height:18px;flex-shrink:0;cursor:pointer}
+  .adeg-row label{font-size:12px;font-weight:700;color:#111;cursor:pointer;display:flex;align-items:center;gap:6px}
+  .adeg-row label .adeg-glyph{font-size:18px;color:var(--gold);line-height:1}
+  .adeg-row.on{background:var(--p1);border-color:var(--g1)}
+  .adeg-row.on label{color:var(--pink)}
+
+  .btn-e{margin-left:auto;flex-shrink:0;width:46px;height:46px;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;border:none;border-radius:5px;padding:3px;cursor:pointer;line-height:1;box-shadow:0 3px 8px rgba(189,0,104,.35);-webkit-tap-highlight-color:transparent;overflow:hidden}
+  .btn-e .e-top{font-size:24px;font-weight:800;line-height:1;color:#fff;display:block}
+  .btn-e .e-bot{font-size:8px;font-weight:800;line-height:1;color:#fff;letter-spacing:.2px;display:block;transform-origin:center center;white-space:nowrap}
+  .btn-e:active{transform:scale(.93)}
+
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:flex-end;justify-content:center}
+  .overlay.show{display:flex}
+  .popup{background:#fff;width:100%;max-width:720px;max-height:88vh;border-radius:12px 12px 0 0;display:flex;flex-direction:column;overflow:hidden;animation:naik .25s ease}
+  @keyframes naik{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .popup-head{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--pink);border-bottom:none;flex-shrink:0}
+  .popup-head b{font-size:14px;color:#fff}
+  .popup-head .sub-head{font-size:11px;color:#FFD6E8}
+  .popup-head button{margin-left:auto;width:32px;height:32px;border-radius:5px;border:1px solid rgba(255,255,255,.5);background:transparent;cursor:pointer;display:grid;place-items:center;flex-shrink:0}
+  .popup-head button i{color:#fff}
+  .popup-head button:active{background:rgba(255,255,255,.15)}
+  .popup-body{overflow-y:auto;padding:12px 14px 20px;-webkit-overflow-scrolling:touch}
+  .popup-body h2{font-size:14px;margin:14px 0 8px;color:#000;display:flex;align-items:center;gap:8px}
+  .popup-body h2:first-child{margin-top:0}
+  .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+  .item{background:#fff;border:1px solid var(--line);border-radius:5px;padding:8px 2px;text-align:center}
+  .item b{font-size:26px;display:block;line-height:1.4;color:var(--gold)}
+  .item span{font-size:11px;font-weight:700;color:#2B2B2B}
+  .item small{display:block;font-size:10px;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:13px;background:#fff}
+  td,th{border:1px solid var(--line);padding:7px;text-align:left;color:#111}
+  th{background:#FDF2F7}
+  td.jawa{font-size:18px;line-height:1.6;color:var(--gold)}
+  .cara{background:#fff;border:1px solid var(--line);border-radius:5px;padding:12px;line-height:1.6;font-size:13px;color:#222}
+  .cara .contoh{font-size:24px;line-height:1.6;color:var(--gold)}
+
+  #fullscreenView{display:none;position:fixed;inset:0;z-index:999;background:#413c59;align-items:center;justify-content:center;padding:18px;text-align:center}
+  #fullscreenView.show{display:flex}
+  .fs-card{position:relative;background:#ffffff;border:7px double var(--gold);border-radius:15px;box-shadow:0 1px 1px rgba(0,0,0,0.636);padding:26px 20px 0;width:min(94vw,640px);height:min(92vh,640px);display:flex;flex-direction:column;align-items:center;overflow:hidden}
+  .fs-card::before{content:"";position:absolute;inset:9px;border:1px solid #E9C96A;border-radius:5px;pointer-events:none}
+
+  #fsAksara{width:100%;flex:1 1 auto;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:9px 11px 16px}
+  #fsAksara.v-top{justify-content:flex-start}
+  #fsAksara.v-center{justify-content:center}
+  #fsAksara.v-bottom{justify-content:flex-end}
+  #fsAksaraIn{flex:0 0 auto;color:var(--gold);line-height:1.7;word-break:normal;text-shadow:0 1px 0 #fff4d3, 0 1px 3px rgba(41,30,0,0.27);width:100%}
+  #fsAksara .syl, #pngAksara .syl{display:inline-block}
+
+.patrick-hand-regular {
+  font-family: "Patrick Hand", cursive !important;
+  font-weight: 400;
+  font-style: normal;
+}
+
+  .pita{position:relative;width:calc(100% + 40px);margin:0 -20px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--g1) 0%,var(--g2) 50%,var(--g1) 100%);color:#fff;border:none;cursor:pointer;padding:15px 18px;border-radius:0 0 5px 5px;flex:0 0 auto;-webkit-tap-highlight-color:transparent;transition:filter .15s}
+  .pita:active{filter:brightness(.85)}
+  .pita span{
+  color:#fff;
+  font-weight:700;
+  letter-spacing:.4px;
+  line-height:1.4;
+  word-break:break-word;
+  text-align:center;
+  display:block;
+  max-width:100%;
+  font-family: "Patrick Hand", cursive !important; /* <--- TAMBAHKAN BARIS INI */
+  font-size: 22px; /* <--- Tambahkan ini juga jika teks terlihat terlalu kecil */
+  letter-spacing: 1px;
+}
+
+  #fsSetBtn{position:absolute;top:3px;right:3px;z-index:5;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #FFE9A8 0%, var(--gold-bright) 45%, var(--gold) 100%);border:5px solid #fff;cursor:pointer;box-shadow:0 0px 0px rgba(0,0,0,.35);-webkit-tap-highlight-color:transparent;padding:0}
+  #fsSetBtn:active{transform:scale(.9)}
+
+  #setPopup{display:none;position:fixed;z-index:1200;width:262px;max-width:88vw;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 40px rgba(0,0,0,.35);overflow:hidden;touch-action:none}
+  #setPopup.show{display:block}
+  .set-head{display:flex;align-items:center;gap:8px;background:var(--pink);color:#fff;padding:9px 10px;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none}
+  .set-head:active{cursor:grabbing}
+  .set-head i.fa-sliders{color:var(--gold-bright)}
+  .set-head b{font-size:12px;letter-spacing:.4px}
+  .set-head .drag-hint{margin-left:auto;display:flex;align-items:center;gap:6px;color:#FFD6E8;font-size:10px}
+  .set-head button{width:26px;height:26px;border-radius:5px;border:1px solid rgba(255,255,255,.5);background:transparent;cursor:pointer;display:grid;place-items:center;flex-shrink:0}
+  .set-head button i{color:#fff;font-size:12px}
+  .set-body{padding:10px 12px 14px;max-height:56vh;overflow-y:auto}
+  .set-label{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:800;color:#222;margin:9px 0 4px}
+  .set-label:first-child{margin-top:0}
+  .set-label span{font-weight:700;color:var(--pink);font-size:10px;background:var(--p1);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  .set-row{display:flex;align-items:center;gap:7px;font-size:11px;color:#333;margin:2px 0 4px}
+  .set-row input[type=checkbox]{accent-color:var(--g1);width:15px;height:15px;flex-shrink:0}
+  .set-body input[type=range]{width:100%;accent-color:var(--g1);margin:2px 0 4px}
+  .set-align{display:flex;gap:6px}
+  .set-align button{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 0;border:1px solid var(--line);background:#fff;border-radius:5px;cursor:pointer;color:var(--muted);font-size:13px}
+  .set-align button.on{background:var(--pink);border-color:var(--pink);color:#fff}
+  .set-body select{width:100%;padding:8px;border:1px solid var(--line);border-radius:5px;font-size:12px;font-weight:700;color:#111;background:#fff}
+  .set-note{font-size:10px;color:#B26A00;background:#FFF3D6;border:1px solid #F2D68A;border-radius:4px;padding:5px 7px;margin-top:5px;line-height:1.4;display:none}
+  .set-note.show{display:block}
+
+  #pngArea{position:fixed;left:-99999px;top:0;background:transparent;padding:0;display:block}
+  #pngSticker{width:1100px;background:#ffffff;border-radius:44px;padding:64px 56px;display:flex;flex-direction:column;align-items:center;gap:36px}
+  #pngAksara{color:var(--gold);line-height:1.7;word-break:break-word;text-align:center;width:100%}
+ .png-pita span{
+  color:#fff;
+  font-weight:700;
+  letter-spacing:1px;
+  line-height:1.4;
+  text-align:center;
+  word-break:break-word;
+  font-family: "Patrick Hand", cursive !important; /* <--- TAMBAHKAN BARIS INI */
+}
+  .png-pita span{color:#fff;font-weight:700;letter-spacing:1px;line-height:1.4;text-align:center;word-break:break-word}
+
+  #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:var(--pink);color:#fff;padding:11px 22px;border-radius:30px;font-size:13px;font-weight:700;z-index:2000;box-shadow:0 6px 18px rgba(0,0,0,.3);opacity:0;transition:transform .25s,opacity .25s;pointer-events:none;max-width:88vw;text-align:center}
+  #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="jawa">ꦤꦸꦭꦶꦱ꧀ ꦗꦮ꧉</div>
+  <div class="head-text"><h1>NULIS JAWA</h1><p>⚪ Hanacaraka Converter ⚪</p></div>
+</header>
+
+<div class="running" aria-hidden="true">
+  <div class="running-track">
+  <span>HP-MU RAME NOTIF ... TAPI AKSARA JAWA SEPI ... PADAHAL KAKINE KO GEMIYEN NULIS SURAT CINTA NGANGGO TULISAN KIE LHO, JAJAL LI MISALE GEMIYEN KAKINE ORA NULIS SURAT CINTA NGGO NININE, MESTI KO ORA BAKAL ANA NENG DUNYA, KO BISA BAE LAIR DADI KADAL 🐊 ... WONG JAWA AJA NGANTI ILANG JAWANE...&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;SCROLL TIKTOK SEWENGI MUPUT BAE WANI ... NULIS AKSARA JAWA 5 MENIT SEWOT KAYA WONG DI TAGIH UTANG ... KEPRIMEN JAL ... AKSARA JAWA KUWE UDU MASA LALU, AKSARA JAWA KUWE JATI DIRI ...&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;JATI DIRI KUWE PADA BAE KELAMBI, ORA DUWE JATI DIRI, PADA BAE WONG MELAKU NENG DALAN ORA KELAMBEN, MBOK YA KATON NGECANDUL&nbsp;&nbsp;😁&nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;</span>
+    <span>HP-MU RAME NOTIF ... TAPI AKSARA JAWA SEPI ... PADAHAL KAKINE KO GEMIYEN NULIS SURAT CINTA NGANGGO TULISAN KIE LHO, JAJAL LI MISALE GEMIYEN KAKINE ORA NULIS SURAT CINTA NGGO NININE, MESTI KO ORA BAKAL ANA NENG DUNYA, KO BISA BAE LAIR DADI KADAL 🐊 ... WONG JAWA AJA NGANTI ILANG JAWANE...&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;SCROLL TIKTOK SEWENGI MUPUT BAE WANI ... NULIS AKSARA JAWA 5 MENIT SEWOT KAYA WONG DI TAGIH UTANG ... KEPRIMEN JAL ... AKSARA JAWA KUWE UDU MASA LALU, AKSARA JAWA KUWE JATI DIRI ...&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;JATI DIRI KUWE PADA BAE KELAMBI, ORA DUWE JATI DIRI, PADA BAE WONG MELAKU NENG DALAN ORA KELAMBEN, MBOK YA KATON NGECANDUL&nbsp;&nbsp;😁&nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;</span>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="dropdown">
+    <button class="dropdown-btn" onclick="toggleDropdown(event)">
+      <span class="icon-wrap small"><i class="fa-solid fa-font"></i></span>
+      <span id="dropdownLabel">Pilih Font</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="dropdown-menu" id="dropdownMenu"></div>
+  </div>
+  <button class="btn-belajar" onclick="openBelajar()"><i class="fa-solid fa-book-open"></i> Belajar</button>
+</div>
+
+<div class="sumber-wrap">
+  <a class="btn-sumber" href="https://aksaradinusantara.com/fonta/aksara/jawa" target="_blank" rel="noopener">
+    <i class="fa-solid fa-link"></i> Sumber : aksaradinusantara
+  </a>
+</div>
+
+<div class="wrap">
+  <div class="card p1">
+    <div class="title-row">
+      <span class="icon-wrap"><i class="fa-solid fa-keyboard"></i></span>
+      <div><b>PAPAN 1 — INPUT TEKS</b><span>Tulis dengan huruf Latin — otomatis terkonversi</span></div>
+      <button class="btn-e" type="button" onclick="sisipE()" title="Sisipkan é (Taling) — contoh: saté">
+        <span class="e-top">é</span>
+        <span class="e-bot">saté</span>
+      </button>
+    </div>
+    <textarea id="input" placeholder="Ketik di sini... (pakai tombol é untuk bunyi 'e' seperti pada 'sate')">Sugeng énjing sedulur.</textarea>
+  </div>
+  
+  <div class="card p2" id="cardHasil">
+    <div class="title-row"><span class="icon-wrap"><i class="fa-solid fa-wand-magic-sparkles"></i></span><div><b>PAPAN 2 — HASIL</b><span>Hanacaraka & Latin</span></div></div>
+    <div class="hasil" id="hasil">ꦲꦭꦺꦴꦲꦥꦏꦧꦂ</div>
+    <div class="latin-hasil" id="latinHasil">ha - lo - a - pa - ka - bar</div>
+
+    <!-- Tombol Adeg-adeg disini -->
+    <div class="adeg-row" id="adegRow" onclick="toggleAdeg()">
+      <input type="checkbox" id="adegCheck">
+      <label for="adegCheck"><span class="adeg-glyph">꧋</span> Pada Adeg-adeg (mode kutipan)</label>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-light" onclick="salin()"><i class="fa-solid fa-copy"></i> Salin</button>
+      <button class="btn btn-grad" id="btnPNG" onclick="savePNG()"><i class="fa-solid fa-image"></i> Simpan PNG</button>
+      <button class="btn" onclick="openFullscreen()"><i class="fa-solid fa-expand"></i> Preview</button>
+    </div>
+    <div class="catatan"><i class="fa-solid fa-circle-info"></i> <b>Adeg-adeg</b> = pembungkus kutipan/pepatah (꧋...꧋). Nonaktifkan untuk penulisan data/kalimat biasa. <b>Simpan PNG</b> = stiker putih, latar transparan.</div>
+  </div>
+</div>
+
+<div class="overlay" id="overlayBelajar" onclick="if(event.target===this) closeBelajar()">
+  <div class="popup">
+    <div class="popup-head">
+      <span class="icon-wrap"><i class="fa-solid fa-book-open"></i></span>
+      <div><b>Belajar Hanacaraka</b><br><span class="sub-head">Aksara • Sandhangan • Cara Penulisan</span></div>
+      <button onclick="closeBelajar()" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="popup-body">
+      <h2><span class="icon-wrap small"><i class="fa-solid fa-font"></i></span> Aksara Nglegena — 20 Huruf Dasar</h2><div class="grid" id="gridNglegena"></div>
+      <h2><span class="icon-wrap small"><i class="fa-solid fa-spell-check"></i></span> Sandhangan — Tanda Vokal</h2>
+      <table><tr><th>Icon</th><th>Nama</th><th>Aksara</th><th>Fungsi</th><th>Contoh</th></tr>
+        <tr><td><span class="icon-wrap small"><i class="fa-solid fa-arrow-up"></i></span></td><td>Wulu</td><td class="jawa">ꦶ</td><td>i</td><td class="jawa">ꦲꦶ = hi</td></tr>
+        <tr><td><span class="icon-wrap small"><i class="fa-solid fa-arrow-down"></i></span></td><td>Suku</td><td class="jawa">ꦸ</td><td>u</td><td class="jawa">ꦲꦸ = hu</td></tr>
+        <tr><td><span class="icon-wrap small"><i class="fa-solid fa-minus"></i></span></td><td>Pepet</td><td class="jawa">ꦼ</td><td>e pepet</td><td class="jawa">ꦲꦼ = hê</td></tr>
+        <tr><td><span class="icon-wrap small"><i class="fa-solid fa-face-smile"></i></span></td><td>Taling</td><td class="jawa">ꦺ</td><td>é taling</td><td class="jawa">ꦲꦺ = hé</td></tr>
+        <tr><td><span class="icon-wrap small"><i class="fa-solid fa-circle"></i></span></td><td>Tarung</td><td class="jawa">ꦴ</td><td>o</td><td class="jawa">ꦲꦴ = ho</td></tr>
+        <tr><td><span class="icon-wrap small"><i class="fa-solid fa-wind"></i></span></td><td>Cecak</td><td class="jawa">ꦁ</td><td>-ng</td><td class="jawa">ꦲꦁ = hang</td></tr>
+        <tr><td><span class="icon-wrap small"><i class="fa-solid fa-wave-square"></i></span></td><td>Layar</td><td class="jawa">ꦂ</td><td>-r</td><td class="jawa">ꦲꦂ = har</td></tr>
+        <tr><td><span class="icon-wrap small"><i class="fa-solid fa-fire"></i></span></td><td>Wignyan</td><td class="jawa">ꦃ</td><td>-h</td><td class="jawa">ꦲꦃ = hah</td></tr>
+        <tr><td><span class="icon-wrap small"><i class="fa-solid fa-scissors"></i></span></td><td>Pangkon</td><td class="jawa">꧀</td><td>matikan</td><td class="jawa">ꦲꦤ꧀ = han</td></tr>
+      </table>
+      <h2><span class="icon-wrap small"><i class="fa-solid fa-crown"></i></span> Aksara Madya / Murda — Huruf Hormat</h2><div class="grid" id="gridMurda"></div>
+      <h2><span class="icon-wrap small"><i class="fa-solid fa-pen"></i></span> Cara Penulisan</h2>
+      <div class="cara"><b>1. Prinsip:</b> Tiap aksara dibaca ...a. Ubah bunyi pakai Sandhangan.<br><b>2. Pasangan:</b> Huruf mati di tengah ditulis di bawah huruf sebelumnya.<br><b>3. Panyigeg:</b> Bunyi -r (ꦂ), -ng (ꦁ), -h (ꦃ) selalu menempel di akhir suku kata.<br><b>4. Arah:</b> Kiri ke kanan seperti Latin.<br><b>5. Angka Jawa:</b> <span class="font-jawa">꧐ ꧑ ꧒ ꧓ ꧔ ꧕ ꧖ ꧗ ꧘ ꧙</span><br><br><b>Contoh:</b><br><span class="contoh">ꦱꦸꦒꦼꦁꦫꦮꦸꦃ</span><br> Sugeng Rawuh = Selamat Datang</div>
+    </div>
+  </div>
+</div>
+
+<div id="fullscreenView">
+  <div class="fs-card" id="fsCard">
+    <button id="fsSetBtn" type="button" aria-label="Pengaturan huruf" onclick="openSetPopup()"></button>
+    <div id="fsAksara" class="v-center"><div id="fsAksaraIn">ꦲꦭꦺꦴꦲꦥꦏꦧꦂ</div></div>
+    <button class="pita" id="pitaLatin" type="button" aria-label="Tutup preview">
+      <span id="fsLatin">halo apa kabar</span>
+    </button>
+  </div>
+</div>
+
+<div id="setPopup">
+  <div class="set-head" id="setHead">
+    <i class="fa-solid fa-sliders"></i><b>PENGATURAN HURUF</b>
+    <span class="drag-hint"><i class="fa-solid fa-up-down-left-right"></i> drag</span>
+    <button type="button" id="setClose" aria-label="Tutup pengaturan"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="set-body">
+    <label class="set-label">Ukuran <span id="setSizeVal">Auto</span></label>
+    <div class="set-row"><input type="checkbox" id="setAuto" checked><span>Otomatis (auto-fit layar)</span></div>
+    <input type="range" id="setSize" min="12" max="96" step="1" value="40">
+
+    <label class="set-label">Baris (spasi antar baris) <span id="setLineVal">1.70</span></label>
+    <input type="range" id="setLine" min="1.2" max="2.4" step="0.05" value="1.7">
+    <div class="set-row"><input type="checkbox" id="setWrap" checked><span>Pisah baris otomatis per suku kata (≥10)</span></div>
+
+    <label class="set-label">Perataan (horizontal)</label>
+    <div class="set-align" id="setHAlign">
+      <button type="button" data-align="left" aria-label="Rata kiri"><i class="fa-solid fa-align-left"></i></button>
+      <button type="button" data-align="center" class="on" aria-label="Rata tengah"><i class="fa-solid fa-align-center"></i></button>
+      <button type="button" data-align="right" aria-label="Rata kanan"><i class="fa-solid fa-align-right"></i></button>
+    </div>
+
+    <label class="set-label">Posisi Teks (vertikal)</label>
+    <div class="set-align" id="setVAlign">
+      <button type="button" data-valign="top" aria-label="Posisi atas"><i class="fa-solid fa-arrow-up"></i></button>
+      <button type="button" data-valign="center" class="on" aria-label="Posisi tengah"><i class="fa-solid fa-minus"></i></button>
+      <button type="button" data-valign="bottom" aria-label="Posisi bawah"><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+
+    <label class="set-label">Font Pilihan</label>
+    <select id="setFont"></select>
+    <div class="set-note" id="setFontNote"></div>
+  </div>
+</div>
+
+<div id="pngArea">
+  <div id="pngSticker">
+    <div id="pngAksara"></div>
+    <div class="png-pita"><span id="pngLatin"></span></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ==================== KUTIPAN SESUAI WAKTU ==================== */
+function kutipanSesuaiWaktu(){
+  const h=new Date().getHours();
+  if(h>=5 && h<11)  return 'Sugeng énjing sedulur.';
+  if(h>=11 && h<15) return 'Sugeng siang sedulur.';
+  if(h>=15 && h<18) return 'Sugeng sontén sedulur.';
+  return 'Sugeng ndalu sedulur.';
+}
+
+/* ==================== DAFTAR FONT ==================== */
+const FONTS=[
+  {key:'noto',  name:'Noto Sans Javanese', family:"'Noto Sans Javanese',serif", unicode:true,  note:'Standar Unicode resmi Google — paling akurat & lengkap.'},
+  {key:'abbakul',name:'AB Bakul',          family:"'AB Bakul',serif",          unicode:false, note:'Font dekoratif; sebagian sandhangan/pasangan tidak mengikuti codepoint Unicode baku.'},
+  {key:'ardemak',name:'AR Demak Beta',     family:"'AR Demak Beta',serif",     unicode:false, note:'Versi beta; dukungan Unicode belum penuh, glif tertentu dapat berbeda dari standar.'},
+  {key:'genkkobra',name:'Genk Kobra Java', family:"'Genk Kobra Java',serif",   unicode:false, note:'Gaya dekoratif Kobra; pemetaan glif kustom, tidak sepenuhnya standar Unicode.'},
+  {key:'adipati',name:'Adipati Genk',      family:"'Adipati Genk',serif",      unicode:false, note:'Font artistik; sebagian karakter mengandalkan glif kustom di luar standar Unicode.'},
+  {key:'nawatura',name:'Nawatura Beta',    family:"'Nawatura Beta',serif",     unicode:false, note:'Versi beta Android; cakupan Unicode terbatas, uji tampilan sandhangan.'},
+  {key:'kramawirya',name:'New Kramawirya', family:"'New Kramawirya',serif",    unicode:true,  note:'Mengikuti kaidah penulisan Jawa; dukungan Unicode baik.'},
+  {key:'damarwulan',name:'Damarwulan',     family:"'Damarwulan',serif",        unicode:true,  note:'Font klasik; memuat blok Unicode Aksara Jawa standar.'},
+  {key:'gerbangpraja',name:'Gerbangpraja', family:"'Gerbangpraja',serif",      unicode:false, note:'Gaya Genk Kobra dekoratif; pemetaan glif kustom, tidak sepenuhnya standar Unicode.'},
+  {key:'jamawi',name:'Jamawi',             family:"'Jamawi',serif",            unicode:true,  note:'Font naskah; dukungan Unicode Aksara Jawa baik.'},
+  {key:'ngayogyan',name:'nyk Ngayogyan',    family:"'nyk Ngayogyan',serif",     unicode:false, note:'Varian italic dekoratif; sebagian glif kustom di luar standar Unicode baku.'}
+];
+let currentFont=FONTS[0];
+
+/* ==================== SETELAN HURUF ==================== */
+const SET={ auto:true, size:40, lineHeight:1.7, align:'center', vAlign:'center', wrap:true };
+let lastAutoSize=40, lastLatinSize=16;
+
+/* ===== STATE ADEG-ADEG ===== */
+let adegAktif=false;
+
+function buildFontMenu(){
+  const sample='ꦲꦤꦕꦫꦏ';
+  document.getElementById('dropdownMenu').innerHTML=FONTS.map(f=>{
+    const warn=f.unicode?'':'<span class="fi-warn"><i class="fa-solid fa-triangle-exclamation"></i>Tidak sepenuhnya standar Unicode</span>';
+    const active=(f.key===currentFont.key)?'active':'';
+    return `<button class="font-item ${active}" onclick="pilihFont('${f.key}')">
+        <div class="fi-top"><i class="fa-solid fa-font"></i><span class="fi-name">${f.name}</span></div>
+        <span class="fi-prev" style="font-family:${f.family}">${sample}</span>${warn}</button>`;
+  }).join('');
+  document.getElementById('setFont').innerHTML=FONTS.map(f=>
+    `<option value="${f.key}"${f.key===currentFont.key?' selected':''}>${f.name}${f.unicode?'':'  ⚠'}</option>`).join('');
+}
+function setFont(key,silent){
+  const f=FONTS.find(x=>x.key===key); if(!f) return;
+  currentFont=f;
+  document.getElementById('dropdownLabel').innerText=f.name;
+  document.getElementById('setFont').value=f.key;
+  buildFontMenu();
+  terapkanFont();
+  const note=document.getElementById('setFontNote');
+  if(!f.unicode){ note.innerHTML='<i class="fa-solid fa-triangle-exclamation"></i> '+f.note; note.classList.add('show'); }
+  else note.classList.remove('show');
+  if(!silent){
+    toast(!f.unicode ? ('⚠ '+f.name+': tidak sepenuhnya standar Unicode.') : ('✓ '+f.name+' diterapkan (standar Unicode).'));
+  }
+  refitJikaPreview();
+}
+function pilihFont(key){ setFont(key,false); document.getElementById('dropdownMenu').classList.remove('show'); }
+
+/* LOGIKA RENDERING FONT LAMA YANG STABIL */
+function terapkanFont(){
+  const fam=currentFont.family;
+  document.getElementById('hasil').style.fontFamily=fam;
+  document.getElementById('fsAksaraIn').style.fontFamily=fam;
+  document.getElementById('pngAksara').style.fontFamily=fam;
+  document.querySelectorAll('.item b, td.jawa, .cara .contoh').forEach(el=>el.style.fontFamily=fam);
+}
+
+/* ==================== FONT SIAP ==================== */
+let fontJawaSiap=false;
+if(document.fonts && document.fonts.load){
+  document.fonts.load("36px 'Noto Sans Javanese'","ꦲꦤꦕꦫꦏ").then(()=>{ fontJawaSiap=true; konversi(); refitJikaPreview(); }).catch(()=>{});
+  document.fonts.ready.then(()=>{ fontJawaSiap=true; konversi(); refitJikaPreview(); rapikanTombolE(); });
+  document.fonts.addEventListener('loadingdone', refitJikaPreview);
+}
+function refitJikaPreview(){
+  if(document.getElementById('fullscreenView').classList.contains('show')){
+    requestAnimationFrame(()=>{ aturUkuranPreview(); requestAnimationFrame(aturUkuranPreview); });
+  }
+}
+
+/* ==================== UMUM ==================== */
+function toggleDropdown(e){ e.stopPropagation(); document.getElementById('dropdownMenu').classList.toggle('show'); }
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.dropdown')) document.getElementById('dropdownMenu').classList.remove('show');
+});
+function openBelajar(){ document.getElementById('overlayBelajar').classList.add('show'); }
+function closeBelajar(){ document.getElementById('overlayBelajar').classList.remove('show'); }
+let toastTimer;
+function toast(pesan){
+  const t=document.getElementById('toast');
+  t.innerText=pesan; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2600);
+}
+function rapikanTombolE(){
+  const top=document.querySelector('.btn-e .e-top');
+  const bot=document.querySelector('.btn-e .e-bot');
+  if(!top||!bot) return;
+  bot.style.transform='';
+  const wTop=top.getBoundingClientRect().width;
+  const wBot=bot.getBoundingClientRect().width;
+  if(wTop>0&&wBot>0){
+    const r=Math.min(1.35,Math.max(0.65,wTop/wBot));
+    bot.style.transform='scaleX('+r.toFixed(3)+')';
+  }
+}
+window.addEventListener('resize', rapikanTombolE);
+window.addEventListener('load', rapikanTombolE);
+
+/* ==================== TAP LANGSUNG KETIK ==================== */
+(function(){
+  const ta=document.getElementById('input');
+  let selected=false;
+  ta.addEventListener('focus',function(){ if(!selected){ selected=true; try{this.select();}catch(e){} } });
+  ta.addEventListener('blur',function(){ selected=false; });
+})();
+
+/* ==================== TOMBOL é ==================== */
+function sisipE(){
+  const ta=document.getElementById('input');
+  const s=ta.selectionStart||0, e=ta.selectionEnd||0;
+  ta.value=ta.value.slice(0,s)+'é'+ta.value.slice(e);
+  ta.focus(); ta.selectionStart=ta.selectionEnd=s+1;
+  konversi();
+  toast('Karakter é (Taling ꦺ) disisipkan');
+}
+
+/* ==================== TOGGLE ADEG-ADEG ==================== */
+function toggleAdeg(){
+  const cb=document.getElementById('adegCheck');
+  const row=document.getElementById('adegRow');
+  adegAktif=!adegAktif;
+  cb.checked=adegAktif;
+  row.classList.toggle('on',adegAktif);
+  konversi();
+  toast(adegAktif ? '꧋ Mode kutipan (adeg-adeg) aktif' : 'Mode biasa (tanpa adeg-adeg)');
+}
+
+/* ================================================================
+   KONVERSI LATIN → HANACARAKA (LOGIKA LAMA YANG STABIL)
+   ================================================================ */
+const map={'ha':'ꦲ','na':'ꦤ','ca':'ꦕ','ra':'ꦫ','ka':'ꦏ','da':'ꦢ','ta':'ꦠ','sa':'ꦱ','wa':'ꦮ','la':'ꦭ','pa':'ꦥ','dha':'ꦝ','ja':'ꦗ','ya':'ꦪ','nya':'ꦚ','ma':'ꦩ','ga':'ꦒ','ba':'ꦧ','tha':'ꦛ','nga':'ꦔ','a':'ꦲ','i':'ꦲꦶ','u':'ꦲꦸ','e':'ꦲꦼ','é':'ꦲꦺ','ê':'ꦲꦼ','o':'ꦲꦴ','h':'ꦲ','n':'ꦤ','c':'ꦕ','r':'ꦫ','k':'ꦏ','d':'ꦢ','t':'ꦠ','s':'ꦱ','w':'ꦮ','l':'ꦭ','p':'ꦥ','j':'ꦗ','y':'ꦪ','m':'ꦩ','g':'ꦒ','b':'ꦧ'};
+const vokalMap={'i':'ꦶ','u':'ꦸ','e':'ꦼ','é':'ꦺ','ê':'ꦼ','o':'ꦴ','a':''};
+const DIGRAF={'ng':'ꦔ','ny':'ꦚ','dh':'ꦝ','th':'ꦛ'};   
+const CLUSTER={'r':'ꦿ','y':'ꦾ'};                      
+const CODA={'r':'ꦂ','ng':'ꦁ','h':'ꦃ'};                
+const PUNCT={'.':'꧉',',':'꧈'};                        
+
+let TOKENS=[], SYL_COUNT=0;
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function konversi(){
+  let teks=document.getElementById('input').value.toLowerCase().trim();
+  let out='',latinList=[],tokens=[],syl=0,i=0;
+
+  const pushSyl=(a,l)=>{ tokens.push({t:'s',a:a,l:l}); out+=a; latinList.push(l); syl++; };
+
+  const mergeCoda=(sand,letters)=>{
+    const last=tokens[tokens.length-1];
+    if(last && last.t==='s'){ last.a+=sand; last.l+=letters; out+=sand; }
+    else pushSyl(sand,letters);   
+  };
+
+  while(i<teks.length){
+    let c=teks[i];
+
+    if(c==='\n'||c==='\r'){ if(c==='\r'&&teks[i+1]==='\n')i++; out+='\n'; tokens.push({t:'n'}); i++; continue; }
+    if(c===' '){ out+=' '; tokens.push({t:' '}); i++; continue; }
+
+    const di=teks.slice(i,i+2);
+    let onset=null, olen=0, letters='';
+    if(DIGRAF[di]){ onset=DIGRAF[di]; olen=2; letters=di; }
+    else if('bcdfghjklmnpqrstvwxyz'.includes(c) && map[c]){ onset=map[c]; olen=1; letters=c; }
+
+    if(onset){
+      if(olen===1){
+        const cr=teks[i+1], cv=teks[i+2];
+        if(CLUSTER[cr] && vokalMap[cv]!==undefined){ onset+=CLUSTER[cr]; olen=2; letters+=cr; }
+      }
+      const v=teks[i+olen];
+
+      if(vokalMap[v]!==undefined){ pushSyl(onset+vokalMap[v], letters+v); i+=olen+1; continue; }
+
+      if(CODA[letters]){ mergeCoda(CODA[letters], letters); i+=olen; continue; }
+      pushSyl(onset+'꧀', letters); i+=olen; continue;   
+    }
+
+    if(map[c]){ pushSyl(map[c], c); i++; continue; }
+
+    if(PUNCT[c]){ out+=PUNCT[c]; tokens.push({t:'c',ch:PUNCT[c]}); i++; continue; }
+
+    out+=c; tokens.push({t:'c',ch:c}); i++;
+  }
+
+  if(adegAktif && out.trim()){
+    out='꧋'+out+'꧋';
+  }
+
+  TOKENS=tokens; SYL_COUNT=syl;
+  document.getElementById('hasil').innerText=out||'—';
+  document.getElementById('latinHasil').innerText=latinList.join(' - ');
+}
+
+function buildPreviewAksara(targetId){
+  const userNL=document.getElementById('input').value.indexOf('\n')!==-1;
+  const ruleActive=SET.wrap && (!userNL) && (SYL_COUNT>=10);
+  let html='';
+  if(adegAktif) html+='<span class="syl">꧋</span>';
+  for(const tk of TOKENS){
+    if(tk.t==='s')      html+='<span class="syl">'+tk.a+'</span>'+(ruleActive?'\u200B':'');
+    else if(tk.t===' ') html+=' ';
+    else if(tk.t==='n') html+='<br>';
+    else                html+='<span class="syl">'+esc(tk.ch)+'</span>';
+  }
+  if(adegAktif) html+='<span class="syl">꧋</span>';
+  document.getElementById(targetId).innerHTML=html||'—';
+  return ruleActive;
+}
+
+function salin(){
+  const teks=document.getElementById('hasil').innerText;
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(teks).then(()=>toast('✓ Teks Hanacaraka disalin')).catch(()=>salinFallback(teks));
+  } else salinFallback(teks);
+}
+function salinFallback(teks){
+  const ta=document.createElement('textarea');
+  ta.value=teks; ta.style.position='fixed'; ta.style.left='-9999px';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try{ document.execCommand('copy'); toast('✓ Teks Hanacaraka disalin'); }
+  catch(e){ toast('✗ Gagal menyalin — pakai browser Chrome/Edge'); }
+  document.body.removeChild(ta);
+}
+
+function savePNG(){
+  const btn=document.getElementById('btnPNG');
+  btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+  const pa=document.getElementById('pngAksara');
+  buildPreviewAksara('pngAksara');
+  pa.style.fontFamily=currentFont.family;
+  pa.style.textAlign=SET.align;
+  pa.style.lineHeight=SET.lineHeight;
+  const base=SET.auto?lastAutoSize:SET.size;
+  pa.style.fontSize=Math.max(24,Math.min(240,base*2))+'px';
+  document.getElementById('pngLatin').textContent=document.getElementById('input').value||'';
+  document.getElementById('pngLatin').style.fontSize=Math.max(22,Math.min(64,lastLatinSize*2))+'px';
+  const skala=Math.max(3,Math.min(4,(window.devicePixelRatio||1)*2));
+  const render=()=>{
+    html2canvas(document.getElementById('pngArea'),{
+      backgroundColor:null, scale:skala, useCORS:true, logging:false
+    }).then(canvas=>{
+      const a=document.createElement('a');
+      a.download='hanacaraka-stiker-'+Date.now()+'.png';
+      a.href=canvas.toDataURL('image/png',1.0);
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      toast('✓ PNG stiker (alas putih, latar transparan) tersimpan');
+    }).catch(err=>{ console.error(err); toast('✗ Gagal menyimpan PNG — coba browser Chrome'); })
+    .finally(()=>{ btn.innerHTML='<i class="fa-solid fa-image"></i> Simpan PNG'; });
+  };
+  if(document.fonts&&document.fonts.load&&!fontJawaSiap){
+    document.fonts.load("120px 'Noto Sans Javanese'","ꦲꦤꦕꦫꦏ").then(render).catch(render);
+  } else render();
+}
+
+function terapkanSetelanKeAksara(){
+  const box=document.getElementById('fsAksara');
+  const inner=document.getElementById('fsAksaraIn');
+  box.classList.remove('v-top','v-center','v-bottom');
+  box.classList.add('v-'+SET.vAlign);
+  inner.style.lineHeight=SET.lineHeight;
+  inner.style.textAlign=SET.align;
+  inner.style.fontFamily=currentFont.family;
+  if(!SET.auto) inner.style.fontSize=SET.size+'px';
+}
+function aturUkuranPreview(){
+  const view=document.getElementById('fullscreenView');
+  if(!view.classList.contains('show')) return;
+  const card=document.getElementById('fsCard');
+  const box=document.getElementById('fsAksara');
+  const aks=document.getElementById('fsAksaraIn');
+  const latin=document.getElementById('fsLatin');
+  const pita=document.getElementById('pitaLatin');
+  terapkanSetelanKeAksara();
+  const L=latin.textContent.trim().length||1;
+  const cw=card.clientWidth-44;
+  let sizeL=(cw*1.7)/(L*0.55);
+  sizeL=Math.min(sizeL,22); sizeL=Math.max(11,Math.floor(sizeL));
+  latin.style.fontSize=sizeL+'px'; lastLatinSize=sizeL;
+  pita.style.padding=(L>30?'11px 12px':'15px 18px');
+  const maxPita=card.clientHeight*0.34;
+  let guard=0;
+  while(pita.offsetHeight>maxPita&&sizeL>10&&guard<30){ sizeL-=1; latin.style.fontSize=sizeL+'px'; guard++; }
+  const avail=box.clientHeight-25;
+  if(SET.auto){
+    const muat=(s)=>{ aks.style.fontSize=s+'px'; return aks.offsetHeight<=avail+1; };
+    let lo=12, hi=88;
+    if(!muat(lo)){ aks.style.fontSize='12px'; lastAutoSize=12; }
+    else{ while(lo<hi){ const mid=(lo+hi+1)>>1; if(muat(mid)) lo=mid; else hi=mid-1; } aks.style.fontSize=lo+'px'; lastAutoSize=lo; }
+    document.getElementById('setSize').value=lo;
+    document.getElementById('setSizeVal').innerText='Auto '+lo+'px';
+  }else{
+    aks.style.fontSize=SET.size+'px';
+    document.getElementById('setSizeVal').innerText=SET.size+'px';
+  }
+}
+function openFullscreen(){
+  konversi();
+  buildPreviewAksara('fsAksaraIn');
+  const latinTeks=(document.getElementById('input').value||'halo apa kabar').replace(/\s*\n\s*/g,' ');
+  document.getElementById('fsLatin').textContent=latinTeks;
+  document.getElementById('fullscreenView').classList.add('show');
+  requestAnimationFrame(()=>{ aturUkuranPreview(); requestAnimationFrame(aturUkuranPreview); });
+  setTimeout(aturUkuranPreview,120);
+  setTimeout(aturUkuranPreview,400);
+}
+function closeFullscreen(){
+  document.getElementById('fullscreenView').classList.remove('show');
+  closeSetPopup();
+}
+const pitaBtn=document.getElementById('pitaLatin');
+function pitaKlik(e){ e.preventDefault(); e.stopPropagation(); closeFullscreen(); }
+pitaBtn.addEventListener('touchend',pitaKlik,{passive:false});
+pitaBtn.addEventListener('click',pitaKlik);
+window.addEventListener('resize', refitJikaPreview);
+window.addEventListener('orientationchange', ()=>setTimeout(refitJikaPreview,250));
+
+const setPopup=document.getElementById('setPopup');
+function openSetPopup(){
+  if(!setPopup.classList.contains('show')){
+    setPopup.style.left=Math.max(8,(innerWidth-262)/2)+'px';
+    setPopup.style.top='64px';
+  }
+  setPopup.classList.add('show');
+}
+function closeSetPopup(){ setPopup.classList.remove('show'); }
+document.getElementById('setClose').addEventListener('click',e=>{ e.stopPropagation(); closeSetPopup(); });
+(function(){
+  const head=document.getElementById('setHead');
+  let drag=null;
+  head.addEventListener('pointerdown',e=>{
+    if(e.target.closest('#setClose')) return;
+    const r=setPopup.getBoundingClientRect();
+    drag={dx:e.clientX-r.left, dy:e.clientY-r.top};
+    try{ head.setPointerCapture(e.pointerId); }catch(err){}
+    e.preventDefault();
+  });
+  head.addEventListener('pointermove',e=>{
+    if(!drag) return;
+    let x=e.clientX-drag.dx, y=e.clientY-drag.dy;
+    const w=setPopup.offsetWidth, h=setPopup.offsetHeight;
+    x=Math.min(Math.max(4,x), innerWidth-w-4);
+    y=Math.min(Math.max(4,y), innerHeight-h-4);
+    setPopup.style.left=x+'px'; setPopup.style.top=y+'px';
+  });
+  ['pointerup','pointercancel'].forEach(ev=>head.addEventListener(ev,()=>{ drag=null; }));
+})();
+
+document.getElementById('setAuto').addEventListener('change',function(){
+  SET.auto=this.checked;
+  if(SET.auto) document.getElementById('setSizeVal').innerText='Auto';
+  else{ SET.size=+document.getElementById('setSize').value; document.getElementById('setSizeVal').innerText=SET.size+'px'; }
+  refitJikaPreview();
+});
+document.getElementById('setSize').addEventListener('input',function(){
+  SET.size=+this.value;
+  if(SET.auto){ SET.auto=false; document.getElementById('setAuto').checked=false; }
+  document.getElementById('setSizeVal').innerText=SET.size+'px';
+  refitJikaPreview();
+});
+document.getElementById('setLine').addEventListener('input',function(){
+  SET.lineHeight=+this.value;
+  document.getElementById('setLineVal').innerText=(+this.value).toFixed(2);
+  terapkanSetelanKeAksara(); refitJikaPreview();
+});
+document.getElementById('setWrap').addEventListener('change',function(){
+  SET.wrap=this.checked;
+  if(document.getElementById('fullscreenView').classList.contains('show')){
+    buildPreviewAksara('fsAksaraIn'); refitJikaPreview();
+  }
+});
+document.querySelectorAll('#setHAlign button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    SET.align=b.dataset.align;
+    document.querySelectorAll('#setHAlign button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    terapkanSetelanKeAksara();
+  });
+});
+document.querySelectorAll('#setVAlign button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    SET.vAlign=b.dataset.valign;
+    document.querySelectorAll('#setVAlign button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    terapkanSetelanKeAksara();
+  });
+});
+document.getElementById('setFont').addEventListener('change',function(){ setFont(this.value,false); });
+
+const nglegena=[['ꦲ','ha'],['ꦤ','na'],['ꦕ','ca'],['ꦫ','ra'],['ꦏ','ka'],['ꦢ','da'],['ꦠ','ta'],['ꦱ','sa'],['ꦮ','wa'],['ꦭ','la'],['ꦥ','pa'],['ꦝ','dha'],['ꦗ','ja'],['ꦪ','ya'],['ꦚ','nya'],['ꦩ','ma'],['ꦒ','ga'],['ꦧ','ba'],['ꦛ','tha'],['ꦔ','nga']];
+const murda=[['ꦲ','Ha'],['ꦤ','Na'],['ꦕ','Ca'],['ꦫ','Ra'],['ꦏ','Ka'],['ꦢ','Da'],['ꦠ','Ta'],['ꦱ','Sa'],['ꦮ','Wa'],['ꦭ','La'],['ꦥ','Pa'],['ꦝ','Dha'],['ꦗ','Ja'],['ꦪ','Ya'],['ꦚ','Nya'],['ꦩ','Ma'],['ꦒ','Ga'],['ꦧ','Ba'],['ꦛ','Tha'],['ꦔ','Nga']];
+function render(id,arr,ket){ document.getElementById(id).innerHTML=arr.map(x=>`<div class="item"><b>${x[0]}</b><span>${x[1]}</span><small>${ket}</small></div>`).join(''); }
+render('gridNglegena',nglegena,'Nglegena');
+render('gridMurda',murda,'Murda / Madya');
+
+document.getElementById('input').addEventListener('input', konversi);
+
+buildFontMenu();
+terapkanFont();
+document.getElementById('input').value=kutipanSesuaiWaktu();
+konversi();
+rapikanTombolE();
+</script>
+</body>
+</html>
