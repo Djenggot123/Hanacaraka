@@ -253,15 +253,15 @@
 
 #pngSticker{
   position:relative;
-  background:#ffffff; /* Latar putih utama */
-  border: 7px double var(--gold); /* Border emas */
+  background:#ffffff;
+  border: 7px double var(--gold);
   border-radius: 15px;
   width: 640px;
   height: 640px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  /* overflow:hidden; <-- HAPUS INI agar teks yang menjuntai tidak terpotong */
+  overflow:hidden; /* Wajib ada agar teks tidak keluar dari border */
   box-shadow:0 1px 1px rgba(0,0,0,0.636);
 }
 
@@ -275,14 +275,15 @@
   z-index: 1;
 }
 
+/* GUNAKAN TABLE-CELL AGAR HTML2CANVAS MERENDER HORIZONTAL */
 #pngAksara{
-  width:100%;
-  flex:1 1 auto;
-  min-height:0;
-  display:flex;
-  flex-direction:column;
-  padding: 30px 20px 20px 20px; /* Padding disesuaikan agar teks tidak menabrak border */
-  justify-content:center;
+  display: table-cell;
+  width: 640px;
+  height: 480px; /* Tinggi area teks */
+  vertical-align: middle;
+  text-align: center;
+  padding: 30px; /* Jarak aman dari border */
+  
   color:var(--gold);
   line-height:1.7;
   word-break:normal;
@@ -293,17 +294,17 @@
 
 /* Pita Magenta di bawah */
 .png-pita{
-  position:relative;
+  position:absolute; /* Absolut agar menempel mati di bawah */
+  bottom: 0;
+  left: 0;
   width:100%;
+  height: 120px; /* Tinggi pita */
   display:flex;
   align-items:center;
   justify-content:center;
   background:linear-gradient(90deg,var(--g1) 0%,var(--g2) 50%,var(--g1) 100%);
   color:#fff;
-  padding:15px 18px;
-  flex:0 0 auto;
   z-index: 2;
-  border-radius: 0 0 5px 5px; /* Agar pita mengikuti lengkungan bawah */
 }
 
 .png-pita span{
@@ -314,6 +315,7 @@
   text-align:center;
   word-break:break-word;
   font-family: "Patrick Hand", cursive !important;
+  font-size: 36px;
 }
 
   #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:var(--pink);color:#fff;padding:11px 22px;border-radius:30px;font-size:13px;font-weight:700;z-index:2000;box-shadow:0 6px 18px rgba(0,0,0,.3);opacity:0;transition:transform .25s,opacity .25s;pointer-events:none;max-width:88vw;text-align:center}
