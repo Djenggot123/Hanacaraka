@@ -127,7 +127,6 @@
   .cara{background:#fff;border:1px solid var(--line);border-radius:5px;padding:12px;line-height:1.6;font-size:13px;color:#222}
   .cara .contoh{font-size:24px;line-height:1.6;color:var(--gold)}
 
-  /* ============ PREVIEW ============ */
   #fullscreenView{display:none;position:fixed;inset:0;z-index:999;background:#413c59;align-items:center;justify-content:center;padding:18px;text-align:center}
   #fullscreenView.show{display:flex}
   .fs-card{position:relative;background:#ffffff;border:7px double var(--gold);border-radius:15px;box-shadow:0 1px 1px rgba(0,0,0,0.636);padding:26px 20px 0;width:min(94vw,640px);height:min(92vh,640px);display:flex;flex-direction:column;align-items:center;overflow:hidden}
@@ -188,135 +187,29 @@
   .set-note{font-size:10px;color:#B26A00;background:#FFF3D6;border:1px solid #F2D68A;border-radius:4px;padding:5px 7px;margin-top:5px;line-height:1.4;display:none}
   .set-note.show{display:block}
 
-  /* Tombol Simpan PNG di dalam Popup */
   .btn-save-popup {
-    width: 100%;
-    padding: 10px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 5px;
-    background: linear-gradient(135deg, var(--g1), var(--g2));
-    color: #fff;
-    font-weight: 700;
-    font-size: 13px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    box-shadow: 0 3px 8px rgba(189,0,104,.35);
-    transition: transform 0.15s;
+    width: 100%; padding: 10px; margin-top: 15px; border: none; border-radius: 5px;
+    background: linear-gradient(135deg, var(--g1), var(--g2)); color: #fff;
+    font-weight: 700; font-size: 13px; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; gap: 8px; box-shadow: 0 3px 8px rgba(189,0,104,.35); transition: transform 0.15s;
   }
   .btn-save-popup:active { transform: scale(0.97); }
 
-/* ===== AREA RENDER PNG (STIKER) ===== */
-#pngArea{
-  position:fixed;
-  left:-99999px;
-  top:0;
-  background:transparent;
-  padding:0;
-  display:block;
-}
+  /* ===== FORMAT 1: PNG TEKS SAJA (TRANSPARAN) ===== */
+  #pngTextArea { position:fixed; left:-99999px; top:0; padding:20px; display:block; background:transparent; }
+  #pngTextAksara { 
+    color:var(--gold); line-height:1.7; text-align:center; 
+    text-shadow:0 1px 0 #fff4d3, 0 1px 3px rgba(41,30,0,0.27); 
+    white-space: nowrap; /* Mencegah teks turun ke bawah */
+  }
 
-#pngSticker{
-  position:relative;
-  background:transparent; /* Transparan di luar */
-  border: 7px double var(--gold);
-  border-radius: 15px;
-  width: 640px;
-  height: 640px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  overflow:hidden;
-  box-shadow:0 1px 1px rgba(0,0,0,0.636);
-}
-
-/* Latar putih yang hanya ada di dalam border emas */
-.png-bg-putih {
-  position: absolute;
-  inset: 0;
-  background: #ffffff;
-  z-index: 1;
-}
-
-/* ===== AREA RENDER PNG (STIKER) ===== */
-#pngArea{
-  position:fixed;
-  left:-99999px;
-  top:0;
-  background:transparent;
-  padding:0;
-  display:block;
-}
-
-#pngSticker{
-  position:relative;
-  background:#ffffff;
-  border: 7px double var(--gold);
-  border-radius: 15px;
-  width: 640px;
-  height: 640px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  overflow:hidden; /* Wajib ada agar teks tidak keluar dari border */
-  box-shadow:0 1px 1px rgba(0,0,0,0.636);
-}
-
-/* Garis tipis emas (inner border) */
-.png-inner-border {
-  position: absolute;
-  inset: 9px;
-  border: 1px solid #E9C96A;
-  border-radius: 5px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* GUNAKAN TABLE-CELL AGAR HTML2CANVAS MERENDER HORIZONTAL */
-#pngAksara{
-  display: table-cell;
-  width: 640px;
-  height: 480px; /* Tinggi area teks */
-  vertical-align: middle;
-  text-align: center;
-  padding: 30px; /* Jarak aman dari border */
-  
-  color:var(--gold);
-  line-height:1.7;
-  word-break:normal;
-  text-shadow:0 1px 0 #fff4d3, 0 1px 3px rgba(41,30,0,0.27);
-  position: relative;
-  z-index: 2;
-}
-
-/* Pita Magenta di bawah */
-.png-pita{
-  position:absolute; /* Absolut agar menempel mati di bawah */
-  bottom: 0;
-  left: 0;
-  width:100%;
-  height: 120px; /* Tinggi pita */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(90deg,var(--g1) 0%,var(--g2) 50%,var(--g1) 100%);
-  color:#fff;
-  z-index: 2;
-}
-
-.png-pita span{
-  color:#fff;
-  font-weight:700;
-  letter-spacing:1px;
-  line-height:1.4;
-  text-align:center;
-  word-break:break-word;
-  font-family: "Patrick Hand", cursive !important;
-  font-size: 36px;
-}
+  /* ===== FORMAT 2: PNG STIKER PREVIEW (LABEL) ===== */
+  #pngStickerArea { position:fixed; left:-99999px; top:0; background:transparent; padding:0; display:block; }
+  #pngSticker { position:relative; background:#ffffff; border: 7px double var(--gold); border-radius: 15px; width: 640px; height: 640px; display:flex; flex-direction:column; align-items:center; overflow:hidden; box-shadow:0 1px 1px rgba(0,0,0,0.636); }
+  .png-inner-border { position: absolute; inset: 9px; border: 1px solid #E9C96A; border-radius: 5px; pointer-events: none; z-index: 1; }
+  #pngStickerAksara { display: table-cell; width: 640px; height: 480px; vertical-align: middle; text-align: center; padding: 30px; color:var(--gold); line-height:1.7; word-break:normal; text-shadow:0 1px 0 #fff4d3, 0 1px 3px rgba(41,30,0,0.27); position: relative; z-index: 2; }
+  .png-pita { position:absolute; bottom: 0; left: 0; width:100%; height: 120px; display:flex; align-items:center; justify-content:center; background:linear-gradient(90deg,var(--g1) 0%,var(--g2) 50%,var(--g1) 100%); color:#fff; z-index: 2; }
+  .png-pita span { color:#fff; font-weight:700; letter-spacing:1px; line-height:1.4; text-align:center; word-break:break-word; font-family: "Patrick Hand", cursive !important; font-size: 36px; }
 
   #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:var(--pink);color:#fff;padding:11px 22px;border-radius:30px;font-size:13px;font-weight:700;z-index:2000;box-shadow:0 6px 18px rgba(0,0,0,.3);opacity:0;transition:transform .25s,opacity .25s;pointer-events:none;max-width:88vw;text-align:center}
   #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
@@ -379,7 +272,8 @@
 
     <div class="btn-row">
       <button class="btn btn-light" onclick="salin()"><i class="fa-solid fa-copy"></i> Salin</button>
-      <button class="btn btn-grad" id="btnPNG" onclick="savePNG()"><i class="fa-solid fa-image"></i> Simpan PNG</button>
+      <!-- TOMBOL SIMPAN PNG DI PAPAN KETIK (Teks Saja) -->
+      <button class="btn btn-grad" id="btnPNG" onclick="savePNGTextOnly()"><i class="fa-solid fa-image"></i> Simpan PNG</button>
       <button class="btn" onclick="openFullscreen()"><i class="fa-solid fa-expand"></i> Preview</button>
     </div>
     <div class="catatan"><i class="fa-solid fa-circle-info"></i> <b>Adeg-adeg</b> = pembungkus kutipan/pepatah (꧋...꧋). Nonaktifkan untuk penulisan data/kalimat biasa. <b>Simpan PNG</b> = stiker putih, latar transparan.</div>
@@ -457,21 +351,23 @@
     <select id="setFont"></select>
     <div class="set-note" id="setFontNote"></div>
 
-    <button id="btnPNGPopup" class="btn-save-popup" onclick="savePNG()">
-      <i class="fa-solid fa-image"></i> Simpan sebagai PNG
+    <!-- TOMBOL SIMPAN PNG DI POPUP PREVIEW (Stiker Label) -->
+    <button id="btnPNGPopup" class="btn-save-popup" onclick="savePNGSticker()">
+      <i class="fa-solid fa-image"></i> Simpan Stiker PNG
     </button>
   </div>
 </div>
 
-<div id="pngArea">
+<!-- AREA RENDER PNG 1: TEKS SAJA (PAPAN KETIK) -->
+<div id="pngTextArea">
+  <div id="pngTextAksara"></div>
+</div>
+
+<!-- AREA RENDER PNG 2: STIKER LABEL (PREVIEW) -->
+<div id="pngStickerArea">
   <div id="pngSticker">
-    <!-- Latar putih di dalam border -->
-    <div class="png-bg-putih"></div>
-    <!-- Garis tipis emas di dalam -->
     <div class="png-inner-border"></div>
-    
-    <!-- Konten -->
-    <div id="pngAksara"></div>
+    <div id="pngStickerAksara"></div>
     <div class="png-pita"><span id="pngLatin"></span></div>
   </div>
 </div>
@@ -543,7 +439,8 @@ function terapkanFont(){
   const fam=currentFont.family;
   document.getElementById('hasil').style.fontFamily=fam;
   document.getElementById('fsAksaraIn').style.fontFamily=fam;
-  document.getElementById('pngAksara').style.fontFamily=fam;
+  document.getElementById('pngTextAksara').style.fontFamily=fam;
+  document.getElementById('pngStickerAksara').style.fontFamily=fam;
   document.querySelectorAll('.item b, td.jawa, .cara .contoh').forEach(el=>el.style.fontFamily=fam);
 }
 
@@ -713,44 +610,80 @@ function salinFallback(teks){
   document.body.removeChild(ta);
 }
 
-function savePNG(){
+/* ==================== SIMPAN PNG (TEKS SAJA / TRANSPARAN) ==================== */
+function savePNGTextOnly(){
   const btn=document.getElementById('btnPNG');
-  const btnPopup=document.getElementById('btnPNGPopup');
-  
   const originalText = btn.innerHTML;
-  const originalTextPopup = btnPopup.innerHTML;
-
   btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
-  btnPopup.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
   
-  const pa=document.getElementById('pngAksara');
-  buildPreviewAksara('pngAksara');
+  const pa = document.getElementById('pngTextAksara');
+  const teks = document.getElementById('hasil').innerText;
+  
+  // Ganti spasi dengan <br> jika terlalu panjang agar tidak melebar tak terbatas
+  pa.innerText = teks;
+  pa.style.fontFamily = currentFont.family;
+  pa.style.fontSize = '120px'; // Ukuran besar agar kualitas HD
+  pa.style.lineHeight = '1.5';
+
+  document.body.offsetHeight; // Paksa reflow
+
+  setTimeout(() => {
+    html2canvas(document.getElementById('pngTextArea'), {
+      backgroundColor: null, 
+      scale: 3, // Skala HD
+      useCORS: true, 
+      logging: false
+    }).then(canvas => {
+      const a = document.createElement('a');
+      a.download = 'hanacaraka-teks-' + Date.now() + '.png';
+      a.href = canvas.toDataURL('image/png', 1.0);
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      toast('✓ Teks PNG (transparan) berhasil disimpan');
+    }).catch(err => { 
+      console.error(err); toast('✗ Gagal menyimpan PNG'); 
+    })
+    .finally(() => { btn.innerHTML = originalText; });
+  }, 300);
+}
+
+/* ==================== SIMPAN PNG (STIKER LABEL / PREVIEW) ==================== */
+function savePNGSticker(){
+  const btn=document.getElementById('btnPNGPopup');
+  const originalText = btn.innerHTML;
+  btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+  
+  const pa=document.getElementById('pngStickerAksara');
+  buildPreviewAksara('pngStickerAksara');
+  
+  // Terapkan gaya
   pa.style.fontFamily=currentFont.family;
   pa.style.textAlign=SET.align;
   pa.style.lineHeight=SET.lineHeight;
   const base=SET.auto?lastAutoSize:SET.size;
   pa.style.fontSize=Math.max(24,Math.min(240,base*2))+'px';
+  
   document.getElementById('pngLatin').textContent=document.getElementById('input').value||'';
   document.getElementById('pngLatin').style.fontSize=Math.max(22,Math.min(64,lastLatinSize*2))+'px';
-  const skala=Math.max(3,Math.min(4,(window.devicePixelRatio||1)*2));
-  const render=()=>{
-    html2canvas(document.getElementById('pngArea'),{
-      backgroundColor:null, scale:skala, useCORS:true, logging:false
-    }).then(canvas=>{
-      const a=document.createElement('a');
-      a.download='hanacaraka-stiker-'+Date.now()+'.png';
-      a.href=canvas.toDataURL('image/png',1.0);
+
+  document.body.offsetHeight; // Paksa reflow
+
+  setTimeout(() => {
+    html2canvas(document.getElementById('pngStickerArea'), {
+      backgroundColor: null, 
+      scale: 3, 
+      useCORS: true, 
+      logging: false
+    }).then(canvas => {
+      const a = document.createElement('a');
+      a.download = 'hanacaraka-stiker-' + Date.now() + '.png';
+      a.href = canvas.toDataURL('image/png', 1.0);
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      toast('✓ PNG stiker (alas putih, latar transparan) tersimpan');
-    }).catch(err=>{ console.error(err); toast('✗ Gagal menyimpan PNG — coba browser Chrome'); })
-    .finally(()=>{ 
-      btn.innerHTML = originalText; 
-      btnPopup.innerHTML = originalTextPopup;
-    });
-  };
-  if(document.fonts&&document.fonts.load&&!fontJawaSiap){
-    document.fonts.load("120px 'Noto Sans Javanese'","ꦲꦤꦕꦫꦏ").then(render).catch(render);
-  } else render();
+      toast('✓ Stiker Label PNG berhasil disimpan');
+    }).catch(err => { 
+      console.error(err); toast('✗ Gagal menyimpan stiker'); 
+    })
+    .finally(() => { btn.innerHTML = originalText; });
+  }, 300);
 }
 
 function terapkanSetelanKeAksara(){
@@ -902,4 +835,4 @@ konversi();
 rapikanTombolE();
 </script>
 </body>
-  </html>
+</html>
