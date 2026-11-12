@@ -200,7 +200,7 @@
   position: fixed; 
   left: -99999px; 
   top: 0; 
-  padding: 3px; /* <--- TAMBAHKAN PADDING 3PX DISINI */
+  padding: 40px; /* <--- TAMBAHKAN PADDING 3PX DISINI */
   display: block; 
   background: transparent; 
 }
@@ -210,14 +210,14 @@
     white-space: nowrap; /* Mencegah teks turun ke bawah */
   }
 
-  /* ===== FORMAT 2: PNG STIKER PREVIEW (LABEL) ===== */
+/* ===== FORMAT 2: PNG STIKER PREVIEW (LABEL) ===== */
 #pngStickerArea { position:fixed; left:-99999px; top:0; background:transparent; padding:0; display:block; }
 
 #pngSticker { 
   position:relative; 
   background:#ffffff; 
-  border: 11px double var(--gold); 
-  border-radius: 18px; 
+  border: 11px double var(--gold); /* Border tetap 11px */
+  border-radius: 25px;              /* Sudut luar lebih bulat & proporsional */
   width: 640px; 
   height: 640px; 
   display:flex; 
@@ -227,12 +227,11 @@
   box-shadow:0 1px 1px rgba(0,0,0,0.636); 
 }
 
-/* PERBAIKAN: Inset dinaikkan menjadi 14px agar tidak menabrak border 11px */
 .png-inner-border { 
   position: absolute; 
-  inset: 14px; 
+  inset: 14px;                      
   border: 1px solid #E9C96A; 
-  border-radius: 6px; /* Lengkungan disesuaikan */
+  border-radius: 9px;               /* Disesuaikan dengan 25px */
   pointer-events: none; 
   z-index: 1; 
 }
@@ -243,7 +242,7 @@
   height: 480px; 
   vertical-align: middle; 
   text-align: center; 
-  padding: 30px; 
+  padding: 30px;                    
   color:var(--gold); 
   line-height:1.7; 
   word-break:normal; 
@@ -264,7 +263,7 @@
   background: linear-gradient(90deg,var(--g1) 0%,var(--g2) 50%,var(--g1) 100%); 
   color: #fff; 
   z-index: 2; 
-  border-radius: 0 0 7px 7px; /* Sedikit disesuaikan dengan border luar 18px */
+  border-radius: 0 0 11px 11px;     /* Lengkungan pita pas untuk radius 25px */
 }
   
   .png-pita span { color:#fff; font-weight:700; letter-spacing:1px; line-height:1.4; text-align:center; word-break:break-word; font-family: "Patrick Hand", cursive !important; font-size: 36px; }
