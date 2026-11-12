@@ -443,17 +443,19 @@ function kutipanSesuaiWaktu(){
 
 /* ==================== DAFTAR FONT ==================== */
 const FONTS=[
-  {key:'noto',  name:'Noto Sans Javanese', family:"'Noto Sans Javanese',serif", unicode:true,  note:'Standar Unicode resmi Google — paling akurat & lengkap.'},
-  {key:'abbakul',name:'AB Bakul',          family:"'AB Bakul',serif",          unicode:false, note:'Font dekoratif; sebagian sandhangan/pasangan tidak mengikuti codepoint Unicode baku.'},
-  {key:'ardemak',name:'AR Demak Beta',     family:"'AR Demak Beta',serif",     unicode:false, note:'Versi beta; dukungan Unicode belum penuh, glif tertentu dapat berbeda dari standar.'},
-  {key:'genkkobra',name:'Genk Kobra Java', family:"'Genk Kobra Java',serif",   unicode:false, note:'Gaya dekoratif Kobra; pemetaan glif kustom, tidak sepenuhnya standar Unicode.'},
-  {key:'adipati',name:'Adipati Genk',      family:"'Adipati Genk',serif",      unicode:false, note:'Font artistik; sebagian karakter mengandalkan glif kustom di luar standar Unicode.'},
-  {key:'nawatura',name:'Nawatura Beta',    family:"'Nawatura Beta',serif",     unicode:false, note:'Versi beta Android; cakupan Unicode terbatas, uji tampilan sandhangan.'},
-  {key:'kramawirya',name:'New Kramawirya', family:"'New Kramawirya',serif",    unicode:true,  note:'Mengikuti kaidah penulisan Jawa; dukungan Unicode baik.'},
-  {key:'damarwulan',name:'Damarwulan',     family:"'Damarwulan',serif",        unicode:true,  note:'Font klasik; memuat blok Unicode Aksara Jawa standar.'},
-  {key:'gerbangpraja',name:'Gerbangpraja', family:"'Gerbangpraja',serif",      unicode:false, note:'Gaya Genk Kobra dekoratif; pemetaan glif kustom, tidak sepenuhnya standar Unicode.'},
-  {key:'jamawi',name:'Jamawi',             family:"'Jamawi',serif",            unicode:true,  note:'Font naskah; dukungan Unicode Aksara Jawa baik.'},
-  {key:'ngayogyan',name:'nyk Ngayogyan',    family:"'nyk Ngayogyan',serif",     unicode:false, note:'Varian italic dekoratif; sebagian glif kustom di luar standar Unicode baku.'}
+  {key:'noto',  name:'Noto Sans Javanese', family:"'Noto Sans Javanese',serif", unicode:true, pad:'40px', note:'Standar Unicode resmi Google — paling akurat & lengkap.'},
+  {key:'abbakul',name:'AB Bakul',          family:"'AB Bakul',serif",          unicode:false, pad:'90px', note:'Font dekoratif; sebagian sandhangan/pasangan tidak mengikuti codepoint Unicode baku.'},
+  {key:'ardemak',name:'AR Demak Beta',     family:"'AR Demak Beta',serif",     unicode:false, pad:'100px', note:'Versi beta; dukungan Unicode belum penuh, glif tertentu dapat berbeda dari standar.'},
+  {key:'genkkobra',name:'Genk Kobra Java', family:"'Genk Kobra Java',serif",   unicode:false, pad:'80px', note:'Gaya dekoratif Kobra; pemetaan glif kustom, tidak sepenuhnya standar Unicode.'},
+  {key:'adipati',name:'Adipati Genk',      family:"'Adipati Genk',serif",      unicode:false, pad:'90px', note:'Font artistik; sebagian karakter mengandalkan glif kustom di luar standar Unicode.'},
+  {key:'nawatura',name:'Nawatura Beta',    family:"'Nawatura Beta',serif",     unicode:false, pad:'90px', note:'Versi beta Android; cakupan Unicode terbatas, uji tampilan sandhangan.'},
+  {key:'kramawirya',name:'New Kramawirya', family:"'New Kramawirya',serif",    unicode:true,  pad:'90px', note:'Mengikuti kaidah penulisan Jawa; dukungan Unicode baik.'},
+  {key:'damarwulan',name:'Damarwulan',     family:"'Damarwulan',serif",        unicode:true,  pad:'120px', note:'Font klasik; memuat blok Unicode Aksara Jawa standar.'},
+  {key:'gerbangpraja',name:'Gerbangpraja', family:"'Gerbangpraja',serif",      unicode:false, pad:'100px', note:'Gaya Genk Kobra dekoratif; pemetaan glif kustom, tidak sepenuhnya standar Unicode.'},
+  {key:'jamawi',name:'Jamawi',             family:"'Jamawi',serif",            unicode:true,  pad:'100px', note:'Font naskah; dukungan Unicode Aksara Jawa baik.'},
+  {key:'ngayogyan',name:'nyk Ngayogyan',   family:"'nyk Ngayogyan',serif",     unicode:false, pad:'110px', note:'Varian italic dekoratif; sebagian glif kustom di luar standar Unicode baku.'}
+];
+
 ];
 let currentFont=FONTS[0];
 
@@ -498,6 +500,14 @@ function terapkanFont(){
   document.getElementById('fsAksaraIn').style.fontFamily=fam;
   document.getElementById('pngTextAksara').style.fontFamily=fam;
   document.getElementById('pngStickerAksara').style.fontFamily=fam;
+  
+  // Memanggil nilai pad dari font yang dipilih
+  if(currentFont.pad) {
+    document.getElementById('pngTextArea').style.padding = currentFont.pad + ' 40px';
+  } else {
+    document.getElementById('pngTextArea').style.padding = '60px 40px'; 
+  }
+
   document.querySelectorAll('.item b, td.jawa, .cara .contoh').forEach(el=>el.style.fontFamily=fam);
 }
 
